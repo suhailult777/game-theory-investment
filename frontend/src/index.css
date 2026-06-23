@@ -1,0 +1,127 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@500;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Syne", sans-serif;
+  --font-sans: "Plus Jakarta Sans", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+
+  /* Custom palette matching a high-end quantitative trading terminal */
+  --color-terminal-bg: #05070a;
+  --color-terminal-card: rgba(10, 14, 23, 0.6);
+  --color-terminal-card-hover: rgba(18, 25, 41, 0.8);
+  --color-terminal-border: rgba(255, 255, 255, 0.04);
+  --color-terminal-border-hover: rgba(255, 255, 255, 0.12);
+  --color-terminal-grid: rgba(255, 255, 255, 0.02);
+
+  --color-brand-gold: #e2b740;
+  --color-brand-silver: #94a3b8;
+  --color-brand-nifty: #00f2fe;
+  --color-brand-realty: #00f5a0;
+
+  --color-state-buy: #00f5a0;
+  --color-state-accumulate: #00b0ff;
+  --color-state-hold: #ffd600;
+  --color-state-avoid: #ff0055;
+
+  --color-fg-primary: #f8fafc;
+  --color-fg-secondary: #94a3b8;
+  --color-fg-muted: #475569;
+}
+
+@layer base {
+  body {
+    background-color: var(--color-terminal-bg);
+    color: var(--color-fg-primary);
+    font-family: var(--font-sans);
+    min-height: 100vh;
+    overflow-x: hidden;
+    /* Grid background */
+    background-image: 
+      linear-gradient(to right, var(--color-terminal-grid) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--color-terminal-grid) 1px, transparent 1px),
+      radial-gradient(at 0% 0%, rgba(0, 242, 254, 0.08) 0px, transparent 40%),
+      radial-gradient(at 100% 100%, rgba(0, 245, 160, 0.08) 0px, transparent 40%),
+      radial-gradient(at 50% 50%, rgba(226, 183, 64, 0.05) 0px, transparent 50%);
+    background-size: 40px 40px, 40px 40px, 100% 100%, 100% 100%, 100% 100%;
+    background-attachment: fixed;
+  }
+
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: rgba(5, 7, 10, 0.5);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 9999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.2);
+  }
+}
+
+@layer utilities {
+  .glow-gold {
+    box-shadow: 0 0 20px rgba(226, 183, 64, 0.15);
+  }
+  .glow-silver {
+    box-shadow: 0 0 20px rgba(148, 163, 184, 0.15);
+  }
+  .glow-nifty {
+    box-shadow: 0 0 20px rgba(0, 242, 254, 0.15);
+  }
+  .glow-realty {
+    box-shadow: 0 0 20px rgba(0, 245, 160, 0.15);
+  }
+  
+  /* Cyberpunk panel corner decoration utility */
+  .cyber-corners {
+    position: relative;
+  }
+  .cyber-corners::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 8px;
+    height: 8px;
+    border-top: 2px solid rgba(255, 255, 255, 0.3);
+    border-left: 2px solid rgba(255, 255, 255, 0.3);
+    pointer-events: none;
+  }
+  .cyber-corners::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 8px;
+    height: 8px;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+    border-right: 2px solid rgba(255, 255, 255, 0.3);
+    pointer-events: none;
+  }
+}
+
+/* Animations */
+@keyframes pulse-ring {
+  0% { transform: scale(0.95); opacity: 0.5; }
+  50% { transform: scale(1.1); opacity: 1; }
+  100% { transform: scale(0.95); opacity: 0.5; }
+}
+
+.pulse-ring-active {
+  animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.spin-slow {
+  animation: spin-slow 12s linear infinite;
+}
